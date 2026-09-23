@@ -4,9 +4,10 @@ import(
   "os"
   "string"
   "...github.com/joho/godotenv v1.5.1 "
-  "github.com/knadh/koan/v2"
+  "github.com/knadh/koanf/v2"
   "github.com/rs/zerolog"
   "github.com/go-playground/validator"
+  "github.com/knadh/koanf/providers/env"
 )
 
 type Config struct{
