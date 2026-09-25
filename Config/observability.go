@@ -3,6 +3,7 @@ package config
 import(
   "os"
   "time"
+  "fmt"
 )
 //parents structs
 type Observibility struct{
@@ -10,7 +11,7 @@ type Observibility struct{
   Enviroment string
   Logging Logger
   NewRelic Relic
-  Healthcheck
+  Healthcheck Health
 }
 //child structs
 type Logger struct{
@@ -36,8 +37,8 @@ type Health struct{
 
 func Defaultobservability() *Observibility{
   return &Observibility {
-    service_name : "Boilerplate",
-    Enviroment : "Development",
+    service_name : "",
+    Enviroment : "",
     logging : Logger{
       Level : "Debug",
       Format : "json" ,
@@ -65,7 +66,7 @@ func (c *observibilty) validate () {
     "Fatal" : true , "Error" : true , "Dedug" : true , "info" : true , "warn" : true
   }
   if !loglevel (c.Logging.level){
-    r3turn fmt.Error("logging level error")
+    return fmt.Error("logging level error")
   }
   if c.Logging.SlowQuery < 0{
     return fmt.Error("logging query cannot be negative")

@@ -16,6 +16,7 @@ type Config struct{
   RedisConfig Redis
   Authconfig Auth
   Serverconfig Server
+  observation *Observibility
 }
 
   type Primary struct{
@@ -69,4 +70,13 @@ func loadenv() (*config,error) {
   }
   return makeconfig,nil
   
+}
+
+//observation code
+func (c *Config) validate() *Config{
+  if c.observation == nil{
+    c.observation = Defaultobservibilty()
+  }
+  c.observation.service_name = "Boilerplate"
+  c.observation.Enviroment = c.Primary.Env
 }
