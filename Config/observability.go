@@ -8,7 +8,7 @@ import(
 type Observibility struct{
   service_name string
   Enviroment string
-  logging Logger
+  Logging Logger
   NewRelic Relic
   Healthcheck
 }
@@ -58,5 +58,17 @@ func Defaultobservability() *Observibility{
    }
 }
 // validation 
-
+func (c *observibilty) validate () {
+  if c.service_name == ""{
+    return fmt.Error{"service name cannot be null"}}
+  loglevel := map[string]bool{
+    "Fatal" : true , "Error" : true , "Dedug" : true , "info" : true , "warn" : true
+  }
+  if !loglevel (c.Logging.level){
+    r3turn fmt.Error("logging level error")
+  }
+  if c.Logging.SlowQuery < 0{
+    return fmt.Error("logging query cannot be negative")
+  }
+}
 
